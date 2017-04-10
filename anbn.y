@@ -1,28 +1,26 @@
 %{
 #include<stdio.h>
-int vd;
+#include<stdlib.h>
 %}
-%union
+
+%token A B NL
+
+%%
+stmt: S NL {printf("valid string\n");
+			 exit(0);}
+;
+S: A S B |
+;
+%%
+
+int yyerror(char *msg)
 {
-        char dval;
+printf("invalid string\n");
+exit(0);
 }
-%token <dval> A
-%token <dval> B
-%%
-str:s'\n' { vd=1; return 0;}
-s:A s B   ;
- |  ;
-%%
+
 int main()
 {
-        printf("enter the string\n");
-        yyparse();
-        if(vd==1)
-        printf(" valid");
-        else
-        printf(" not valid");
-}
-yyerror(char *s)
-{
-        printf("%s",s);
+printf("enter the string\n");
+yyparse();
 }
