@@ -41,20 +41,22 @@ follows={}
 follows['S']=['^']
 for o in range(0,n):
 	k=head[o]
+	if k not in follows:
+		follows[k]=[]
 	count=0
 	for l in body:
 		count1=0
 		for m in l:
 			if k==m:
 				if count1==len(l)-1:
-					follows[k]=follows[head[count]]
+					follows[k].append(''.join(follows[head[count]]))
 				else:
 					if l[count1+1]=='|':
-						follows[k]=follows[head[count]]
+						follows[k].append(''.join(follows[head[count]]))
 					elif isSmall((l[count1+1])):
-						follows[k]=l[count1+1]
+						follows[k].append(''.join(l[count1+1]))
 					else:
-						follows[k]=first[l[count1+1]]
+						follows[k].append(''.join(first[l[count1+1]]))
 					
 			count1+=1
 		count+=1
